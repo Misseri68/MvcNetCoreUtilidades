@@ -23,7 +23,7 @@ namespace MvcNetCoreUtilidades.Controllers
         }
 
         [HttpPost]
-        public IActionResult SubirFichero(IFormFile fichero)
+        public async  Task<IActionResult> SubirFichero(IFormFile fichero)
         {
 
             string fileName = fichero.FileName;
@@ -31,7 +31,7 @@ namespace MvcNetCoreUtilidades.Controllers
             string urlPath = this.helper.MapUrlPath(fileName, Folders.Images);
             using (Stream stream = new FileStream(path, FileMode.Create))
             {
-                //await fichero.CopyTo(stream);
+                await fichero.CopyToAsync(stream);
             }
 
             ViewData["MENSAJE"] = "Fichero subido a " + path;
@@ -40,21 +40,6 @@ namespace MvcNetCoreUtilidades.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> SubirFichero(IFormFile fichero)
-        //{
-
-        //    string fileName = fichero.FileName;
-        //    string path = this.helper.MapPath(fileName, Folders.Images);
-        //    string urlPath = this.helper.MapUrlPath(fileName, Folders.Images);
-        //    using (Stream stream = new FileStream(path, FileMode.Create)) {
-        //        await fichero.CopyToAsync(stream);
-        //    }
-
-        //    ViewData["MENSAJE"] = "Fichero subido a " + path;
-        //    ViewData["URL"] = urlPath;
-
-        //    return View();
-        //}
+       
     }
 }
