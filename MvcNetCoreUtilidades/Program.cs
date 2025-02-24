@@ -12,7 +12,9 @@ builder.Services.AddControllersWithViews();
 
 
 var app = builder.Build();
-
+app.UseExceptionHandler("/Home/Error");
+// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+app.UseHsts();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -31,7 +33,7 @@ app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Caching}/{action=index}/{id?}")
+    pattern: "{controller=Cifrados}/{action=index}/{id?}")
     .WithStaticAssets();
 
 
