@@ -1,4 +1,5 @@
 using MvcNetCoreUtilidades.Helpers;
+using MvcNetCoreUtilidades.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,8 @@ builder.Services.AddSingleton<HelperPathProvider>();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddMemoryCache();
 builder.Services.AddControllersWithViews();
+builder.Services.AddTransient<RepositoryCoches>();
+builder.Services.AddSession();
 
 
 var app = builder.Build();
@@ -31,9 +34,11 @@ app.UseAuthorization();
 
 app.MapStaticAssets();
 
+app.UseSession();
+
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Cifrados}/{action=index}/{id?}")
+    pattern: "{controller=Cifrados}/{action=CifradoEficiente}/{id?}")
     .WithStaticAssets();
 
 

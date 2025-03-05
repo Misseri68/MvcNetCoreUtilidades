@@ -1,0 +1,11 @@
+﻿@model Coche
+
+<h1>Coche details</h1>
+
+@if (@Model == null){
+    <p>No existe el coche buscado</p>
+}else{
+    @Model.Marca @Model.Modelo
+    <img src="@Model.Imagen" style="width:450px;height:450px;"/>
+
+}
